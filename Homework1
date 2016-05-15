@@ -1,0 +1,379 @@
+---
+title: 'Homework #1'
+author: "Miguel Salazar"
+date: "March 30, 2016"
+output: word_document
+---
+
+```{r, echo=FALSE}
+fitbit_data <- read.csv("~/Downloads/ErinsFitbit (1).csv")
+```
+
+
+###Problem I
+
+A) Name of Columns
+```{r, echo=FALSE}
+colnames(fitbit_data);
+```
+
+B) Number of Rows
+```{r, echo=FALSE}
+nrow(fitbit_data);
+```
+
+C) Summary
+```{r, echo=FALSE}
+summary(fitbit_data);
+```
+The function summary treats categorical columns by providing how many times the title occured. Forexample on the column "Day", data was recorded 13 times on a Friday. On the other hand the function summary treats numerical data by gathering the Min., 1st Quartile, Median, Mean, 3rd Quartile, and Maximum. 
+
+D) Mean of Steps 
+```{r, echo=FALSE}
+mean(fitbit_data[,"Steps"]);
+```
+
+
+###Problem II
+
+A) Average Steps Per Day
+
+Week
+```{r, echo=FALSE}
+mean(fitbit_data[,"Steps"]);
+```
+
+Monday
+```{r, echo=FALSE}
+Monday <- fitbit_data[which(fitbit_data$Day == 'M'),];
+mean(Monday$Steps);
+```
+Tuesday
+```{r, echo=FALSE}
+Tuesday <- fitbit_data[which(fitbit_data$Day == 'T'),];
+mean(Tuesday$Steps);
+```
+Wednesday
+```{r, echo=FALSE}
+Wednesday <- fitbit_data[which(fitbit_data$Day == 'W'),];
+mean(Wednesday$Steps);
+```
+Thursday
+```{r, echo=FALSE}
+Thursday <- fitbit_data[which(fitbit_data$Day == 'R'),];
+mean(Thursday$Steps);
+```
+Friday
+```{r, echo=FALSE}
+Friday <- fitbit_data[which(fitbit_data$Day == 'F'),];
+mean(Friday$Steps);
+```
+Saturday
+```{r, echo=FALSE}
+Saturday <- fitbit_data[which(fitbit_data$Day == 'Sat'),];
+mean(Saturday$Steps);
+```
+Sunday
+```{r, echo=FALSE}
+Sunday <- fitbit_data[which(fitbit_data$Day == 'Sun'),];
+mean(Sunday$Steps);
+```
+
+
+B) Average Hours of Sleep Per Day
+
+Week
+```{r, echo=FALSE}
+mean(fitbit_data[,"Sleep"]);
+```
+
+Monday
+```{r, echo=FALSE}
+Monday <- fitbit_data[which(fitbit_data$Day == 'M'),];
+mean(Monday$Sleep);
+```
+Tuesday
+```{r, echo=FALSE}
+Tuesday <- fitbit_data[which(fitbit_data$Day == 'T'),];
+mean(Tuesday$Sleep);
+```
+Wednesday
+```{r, echo=FALSE}
+Wednesday <- fitbit_data[which(fitbit_data$Day == 'W'),];
+mean(Wednesday$Sleep);
+```
+Thursday
+```{r, echo=FALSE}
+Thursday <- fitbit_data[which(fitbit_data$Day == 'R'),];
+mean(Thursday$Sleep);
+```
+Friday
+```{r, echo=FALSE}
+Friday <- fitbit_data[which(fitbit_data$Day == 'F'),];
+mean(Friday$Sleep);
+```
+Saturday
+```{r, echo=FALSE}
+Saturday <- fitbit_data[which(fitbit_data$Day == 'Sat'),];
+mean(Saturday$Sleep);
+```
+Sunday
+```{r, echo=FALSE}
+Sunday <- fitbit_data[which(fitbit_data$Day == 'Sun'),];
+mean(Sunday$Sleep);
+```
+
+C) Standard Deviation of Steps Per Day
+
+Week
+```{r, echo=FALSE}
+sd(fitbit_data[,"Steps"]);
+```
+
+Monday
+```{r, echo=FALSE}
+Monday <- fitbit_data[which(fitbit_data$Day == 'M'),];
+sd(Monday$Steps);
+```
+Tuesday
+```{r, echo=FALSE}
+Tuesday <- fitbit_data[which(fitbit_data$Day == 'T'),];
+sd(Tuesday$Steps);
+```
+Wednesday
+```{r, echo=FALSE}
+Wednesday <- fitbit_data[which(fitbit_data$Day == 'W'),];
+sd(Wednesday$Steps);
+```
+Thursday
+```{r, echo=FALSE}
+Thursday <- fitbit_data[which(fitbit_data$Day == 'R'),];
+sd(Thursday$Steps);
+```
+Friday
+```{r, echo=FALSE}
+Friday <- fitbit_data[which(fitbit_data$Day == 'F'),];
+sd(Friday$Steps);
+```
+Saturday
+```{r, echo=FALSE}
+Saturday <- fitbit_data[which(fitbit_data$Day == 'Sat'),];
+sd(Saturday$Steps);
+```
+Sunday
+```{r, echo=FALSE}
+Sunday <- fitbit_data[which(fitbit_data$Day == 'Sun'),];
+sd(Sunday$Steps);
+```
+
+D) Standard Deviation for Hours of Sleep Per Day
+
+Week
+```{r, echo=FALSE}
+sd(fitbit_data[,"Sleep"]);
+```
+
+Monday
+```{r, echo=FALSE}
+Monday <- fitbit_data[which(fitbit_data$Day == 'M'),];
+sd(Monday$Sleep);
+```
+Tuesday
+```{r, echo=FALSE}
+Tuesday <- fitbit_data[which(fitbit_data$Day == 'T'),];
+sd(Tuesday$Sleep);
+```
+Wednesday
+```{r, echo=FALSE}
+Wednesday <- fitbit_data[which(fitbit_data$Day == 'W'),];
+sd(Wednesday$Sleep);
+```
+Thursday
+```{r, echo=FALSE}
+Thursday <- fitbit_data[which(fitbit_data$Day == 'R'),];
+sd(Thursday$Sleep);
+```
+Friday
+```{r, echo=FALSE}
+Friday <- fitbit_data[which(fitbit_data$Day == 'F'),];
+sd(Friday$Sleep);
+```
+Saturday
+```{r, echo=FALSE}
+Saturday <- fitbit_data[which(fitbit_data$Day == 'Sat'),];
+sd(Saturday$Sleep);
+```
+Sunday
+```{r, echo=FALSE}
+Sunday <- fitbit_data[which(fitbit_data$Day == 'Sun'),];
+sd(Sunday$Sleep);
+```
+
+###Problem III
+
+A) Five-Number Summary
+```{r, echo=FALSE}
+fivenum(fitbit_data[,"Miles"]);
+```
+The function fivenum is called the "Tukey Five-Number Summary" which returns the min, lower-hinge, median, upper-hinge, and maximum respectively. Thus, the fivenum function returns those five values for fitbit_data.
+
+B) Table
+```{r, echo=FALSE}
+table(fitbit_data[,"Day"]);
+```
+The function table creates a table of the amount of days of the week the fitbit was used. Forexample on Friday it was used 13 times. 
+
+C) Median Number of Hours of Sleep Per Month 
+
+All months
+```{r, echo=FALSE}
+median(fitbit_data[,"Sleep"]);
+```
+
+January
+```{r, echo=FALSE}
+January <- fitbit_data[which(fitbit_data$Month == 'Jan'),];
+median(January$Sleep);
+```
+February
+```{r, echo=FALSE}
+February <- fitbit_data[which(fitbit_data$Month == 'Feb'),];
+median(February$Sleep);
+```
+March
+```{r, echo=FALSE}
+March <- fitbit_data[which(fitbit_data$Month == 'March'),];
+median(March$Sleep);
+```
+
+
+D) Median Distance Traveled Per Month
+
+All Months
+```{r, echo=FALSE}
+median(fitbit_data[,"Miles"]);
+```
+
+
+January
+```{r, echo=FALSE}
+January <- fitbit_data[which(fitbit_data$Month == 'Jan'),];
+median(January$Miles);
+```
+February
+```{r, echo=FALSE}
+February <- fitbit_data[which(fitbit_data$Month == 'Feb'),];
+median(February$Miles);
+```
+March
+```{r, echo=FALSE}
+March <- fitbit_data[which(fitbit_data$Month == 'March'),];
+median(March$Miles);
+```
+
+
+###Problem IV
+
+A) 
+Sunday is the least active day of the week because the median for the number of steps is less than all the other days of the week, despite it might also be the one with the most outliers.
+
+
+```{r, echo=FALSE}
+boxplot(fitbit_data$Steps ~ fitbit_data$Day, xlab = "Day", ylab ="Steps");
+```
+
+B) 
+Monday is the day with the least amount of sleep because the median is the smallest out of all the other days of the week.
+
+```{r, echo=FALSE}
+boxplot(fitbit_data$Sleep ~ fitbit_data$Day,  xlab = "Day", ylab ="Sleep");
+```
+
+C)
+Yes, the data shows that there is outliers for the amount of Steps per day. The days of the week there's outliers are on Wednesday, Saturday, and Sunday.
+
+D)
+Yes, the data shows that there is outliers for the amount of hours of sleep per day. The days of the week there's outliers are on Monday, Thursday, Friday, Saturday, and Sunday.
+
+********
+###Code Appendix
+
+```{r, eval=FALSE}
+fitbit_data <- read.csv("~/Downloads/ErinsFitbit.csv");
+#A) Name of Columns
+colnames(fitbit_data);
+
+#B) Number of Rows
+nrow(fitbit_data);
+
+
+#C) Summary
+summary(fitbit_data);
+
+
+#D) Mean of Steps
+fitbit_data[,"Steps"];
+
+#Problem II
+
+#A) Average Steps
+mean(fitbit_data[,"Steps"]);
+
+
+#B) Average Hour of Sleep
+mean(fitbit_data[,"Sleep"]);
+
+
+#C) Standard Deviation of Steps
+sd(fitbit_data[,"Steps"]);
+
+#D) Standard Deviation for Hours of Sleep
+sd(fitbit_data[,"Sleep"]);
+
+#Problem III
+
+#A) Five-Number Summary
+fivenum(fitbit_data[,"Distance"]);
+
+#B) Table
+table(fitbit_data[,"Day"]);
+
+
+#C) Median Number of Hours of Sleep
+median(fitbit_data[,"Sleep"]);
+
+#January
+January <- fitbit_data[which(fitbit_data$Month == 'Jan'),];
+median(January$Sleep);
+
+#February
+February <- fitbit_data[which(fitbit_data$Month == 'Feb'),];
+median(February$Sleep);
+
+#March
+March <- fitbit_data[which(fitbit_data$Month == 'March'),];
+median(March$Sleep);
+
+#D) Median Distance Traveled
+median(fitbit_data[,"Distance"]);
+
+#January
+January <- fitbit_data[which(fitbit_data$Month == 'Jan'),];
+median(January$Distance);
+
+#February
+February <- fitbit_data[which(fitbit_data$Month == 'Feb'),];
+median(February$Distance);
+
+#March
+March <- fitbit_data[which(fitbit_data$Month == 'March'),];
+median(March$Distance);
+
+#Problem IV
+
+#A) 
+boxplot(fitbit_data$Steps ~ fitbit_data$Day, xlab = "Day", ylab ="Steps");
+
+#B) 
+boxplot(fitbit_data$Sleep ~ fitbit_data$Day,  xlab = "Day", ylab ="Sleep");
+```
