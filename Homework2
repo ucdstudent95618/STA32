@@ -1,0 +1,240 @@
+---
+title: 'Homework #2'
+author: "Miguel Salazar"
+date: "April 9, 2016"
+output: word_document
+---
+
+```{r, echo=FALSE}
+fitbit_data <- read.csv("~/Downloads/ErinsFitbit (1).csv")
+```
+
+
+###Problem I
+
+A) Number of days where the total steps were above 10000
+```{r,echo=FALSE}
+
+data <- fitbit_data[which(fitbit_data$Steps > 10000),]
+nrow(data)
+
+```
+
+B) The average number of steps taken when total sleep was below 7 hours
+```{r, echo=FALSE}
+data <- fitbit_data[which(fitbit_data$Sleep < 7),]
+mean(data$Steps)
+```
+
+C) The number of days where the total miles walked was over 5
+```{r, echo=FALSE}
+data <- fitbit_data[which(fitbit_data$Miles > 5),]
+nrow(data)
+```
+
+D) The average miles where sleep was above 8 hours
+```{r, echo=FALSE}
+data <- fitbit_data[which(fitbit_data$Sleep > 8),]
+mean(data$Miles)
+```
+
+
+###Problem II
+
+A)
+```{r, echo=FALSE}
+STD_Dev = function(X){
+ mean_x = mean(X);
+ sd_x = sd(X);
+ #X - mean_x / sd_x
+ A = X - mean_x;
+ final <- (A / sd_x);
+ 
+ return (sd(final));
+}
+X = 1:100;
+STD_Dev(X);
+```
+
+B)
+```{r, echo=FALSE}
+S = function(X){
+sd_x = sd(X);
+mean_x = mean(X);
+s = sum(X-mean_x);
+
+ans1 = mean_x - 2*(sd_x);
+ans2 = mean_x + 2*(sd_x);
+
+final = c(ans1,ans2)
+
+names(final) = c("[UPPER]", "[LOWER]");
+return(final);
+}
+X = 1:100;
+S(X);
+```
+
+C)
+```{r, echo=FALSE}
+my.function = function(X){
+  mean_x = mean(X);
+  std_x = sd(X);
+  ans = (std_x * 3);
+  bottom = mean_x - std_x;
+  top = mean_x + std_x;
+  vec <- X[X > bottom & X < top];
+  answer = mean(vec);
+  return(answer);
+}
+X = c(1:200,200,300);
+my.function(X);
+
+```
+
+
+###Problem III
+
+A)
+```{r,echo=FALSE}
+
+flipCoin = function(X)
+{
+  prob = 0
+  for (i in 1:20){
+    s = sample(X, size = 1, replace = TRUE)
+
+    if (s == "Heads")
+    {
+      prob = prob + 1;
+    }
+  }
+  return(prob/20)
+}
+coin <- c("Heads", "Tails")
+flipCoin(coin)
+```
+
+B)
+```{r,echo=FALSE}
+coinFlip = function(X,N)
+{
+  prob = 0;
+  results = sapply(1:N,function (i){
+    s = sample(X, size = 1, replace = TRUE)
+    if (s == "Heads")
+      {
+      prob = prob + 1;
+      }
+    return(prob);
+  })
+  return(sum(results)/N)
+}
+
+coinFlip(coin, 10)
+coinFlip(coin, 100)
+coinFlip(coin, 1000)
+coinFlip(coin, 10000)
+coinFlip(coin, 100000)
+```
+
+C)
+```{r,echo=FALSE}
+coinFlip = function(X,N)
+{
+  prob = 0;
+  results = sapply(1:N,function (i){
+    s = sample(X, size = 1, replace = TRUE)
+    if (s == "Heads")
+      {
+      prob = prob + 1;
+      }
+    return(prob);
+  })
+  result = sum(results)/N
+  error = abs(0.5 - result)
+  return(error)
+}
+
+coinFlip(coin, 10)
+coinFlip(coin, 100)
+coinFlip(coin, 1000)
+coinFlip(coin, 10000)
+coinFlip(coin, 100000)
+```
+
+D)
+The error decreases as we increase the number of samples we produce for finding the amount of times we receive a head. Therefore if we have a really huge number of samples (N) we will reach a closer approximation to 0.5, which is the true probability of getting heads.
+
+###Problem IV. 
+
+A)
+```{r,echo=FALSE}
+functOne = function(X,N)
+{
+    s <- sample(X, size = 7, replace = FALSE)
+    return(s);
+}
+values = as.character(1:7)
+functOne(values,1)
+```
+
+B)
+```{r,echo=FALSE}
+functOne = function(X,N)
+{
+  count = 0;
+  results = sapply(1:N,function (i){
+    s <- sample(X, size = 7, replace = FALSE)
+    check <- s[1]
+    if (check == "1")
+      {
+      count = count + 1;
+      }
+    return(count)
+  })
+  return(sum(results))
+}
+values = as.character(1:7)
+functOne(values,100000)
+```
+
+C)
+```{r,echo=FALSE}
+functOne = function(X,N)
+{
+  count = 0;
+  results = sapply(1:N,function (i){
+    s <- sample(X, size = 7, replace = FALSE)
+    check <- s[1];
+    check2 <- s[7];
+    if (check == "3" & check2 == "7")
+      {
+      count = count + 1;
+      }
+    return(count)
+  })
+  return(sum(results)/N)
+}
+values = as.character(1:7)
+functOne(values,100000)
+```
+
+
+D)
+```{r, echo=FALSE}
+functOne = function(X,N)
+{
+  count = 0;
+  results = sapply(1:N,function (i){
+    s <- sample(X, size = 7, replace = FALSE)
+    one.order = paste(s,collapse = "")
+   return(one.order);
+  })
+  u <- unique(results);
+  return(length(u))
+}
+values = as.character(1:7)
+functOne(values,100000)
+```
+
