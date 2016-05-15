@@ -1,0 +1,142 @@
+---
+title: "Homework 4"
+author: "Miguel Salazar"
+date: "May 1, 2016"
+output: word_document
+---
+
+###Problem I
+
+A)
+```{r,echo=FALSE}
+Prob1 = function(n){
+  Does_HW = replicate(n,sample(c("Yes","No"),1, replace = TRUE, prob = c(0.95,0.05)))
+  return(sum(Does_HW == "No"))
+}
+Prob1(40)
+```
+
+B) 
+```{r,echo=FALSE}
+
+hist(rbinom(1000000, 40, 0.05))
+```
+
+C) 
+The distribution is not symmetric because it does not have a bell shaped curve. 
+
+D) 
+The most frequent number of successes is 2 out of the 40 students, which means they did not do their hw.
+
+```{r,echo=FALSE}
+table(rbinom(1000000,40,0.05))
+```
+
+### Problem II
+
+A) The average of the number of successes in 40 trials and the standard deviation
+```{r,echo=FALSE}
+m = mean(rbinom(1000000,40,0.05))
+std = sd(rbinom(1000000,40,0.05))
+result = cbind(m,std)
+colnames(result) = c("mean","std dev")
+result
+```
+
+B) The probability that all students turned in their homework 
+```{r,echo=FALSE}
+P = function(x){
+bin = rbinom(x, 40, 0.05)
+ans = sum(bin == 0)/x
+return(ans)
+}
+P(1000000)
+```
+
+C) The probability that at least two students did not turn in their homework
+```{r,echo=FALSE}
+P = function(x){
+bin = rbinom(x, 40, 0.05)
+ans = sum(bin >= 2)/x
+return(ans)
+}
+P(1000000)
+```
+
+D)
+```{r,echo=FALSE}
+P = function(x){
+bin = rbinom(x, 40, 0.05)
+ans = median(bin > 0)
+return(ans)
+}
+P(1000000)
+```
+
+###Problem III
+
+```{r,echo=FALSE}
+lynx = as.numeric(lynx)
+```
+
+A)
+```{r, echo=FALSE}
+hist(lynx, main = "Population")
+a = mean(lynx)
+b = sd(lynx)
+c = var(lynx)
+ans = cbind(a,b,c)
+colnames(ans) = c("mean", "std dev", "variance")
+ans
+```
+The population is not normally distributed because it does not have a bell shaped curve.
+
+B)
+```{r, echo=FALSE}
+mean(sample(lynx,10,replace = TRUE))
+
+```
+
+C)
+```{r, echo=FALSE}
+x = replicate(1000000,mean(sample(lynx,10)))
+mean(x)
+sd(x)
+```
+
+D)
+They were very similar with a differece of 0.165. Therefore both of the means are closely related. The standard deviation for both differed greatly since I got 1585.844 for the std dev for part c and 478.7804 for part a.
+
+### Problem IV
+
+A)
+```{r, echo=FALSE}
+x = replicate(1000000,mean(sample(lynx,10)))
+hist(x)
+```
+This histogram is less skewed and has a bell shaped curve(normally distributed).
+
+B)
+```{r,echo=FALSE}
+y = sample(lynx,50)
+mean(y)
+sd(y)
+```
+
+C)
+```{r,echo=FALSE}
+y = replicate(1000000,mean(sample(lynx,50)))
+mean(y)
+sd(y)
+```
+The mean increased slightly and the standard deviation decrease a great amount from 1426 to 168.
+
+D)
+```{r,echo=FALSE}
+y = replicate(1000000,mean(sample(lynx,50)))
+hist(y)
+```
+The shape is a bell curve.
+
+
+
