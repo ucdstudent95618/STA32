@@ -1,0 +1,299 @@
+---
+title: "Homework 5"
+author: "Miguel Salazar"
+date: "May 10, 2016"
+output: word_document
+---
+
+### Problem I
+
+A)
+```{r,echo=FALSE}
+
+rainy_day = sapply(1:1,function(i){
+  rain = 0
+  run_time = 0
+  while(rain[1] != 1){
+    run_time = run_time + 1
+    rain = sample(c(0,1),1, prob = c(0.90,0.10))
+    }
+  ans = run_time
+  return(ans)
+})
+mean(rainy_day)
+
+```
+
+B)
+
+```{r, echo=FALSE}
+
+#a = replicate(20000,rgeom(1,0.10))
+#hist(a, main = "20000 trials of X ~ Geometric(0.10)")
+
+rainy_day = sapply(1:20000,function(i){
+  rain = 0
+  run_time = 0
+  while(rain[1] != 1){
+    run_time = run_time + 1
+    rain = sample(c(0,1),1, prob = c(0.90,0.10))
+    }
+  ans = run_time
+  return(ans)
+})
+hist(rainy_day,main = "20000 trials of X ~ Geometric(0.10)", xlab = "Number of Days")
+
+```
+
+C)
+The greatest frequency for is between 0-5. Then decreases as we get closer to 80. Thus this curves shows a great number of decrease because it is less like to take 80 days for the first day of rain. 
+
+D)
+```{r, echo=FALSE}
+rainy_day = sapply(1:20000,function(i){
+  rain = 0
+  run_time = 0
+  while(rain[1] != 1){
+    run_time = run_time + 1
+    rain = sample(c(0,1),1, prob = c(0.90,0.10))
+    }
+  ans = run_time
+  return(ans)
+})
+
+mean(rainy_day)
+sd(rainy_day)
+```
+
+E) The probability that it took 15 days until the first rainy day
+```{r, echo=FALSE}
+P = function(n){
+rainy_day = sapply(1:n,function(i){
+  rain = 0
+  run_time = 0
+  while(rain[1] != 1){
+    run_time = run_time + 1
+    rain = sample(c(0,1),1, prob = c(0.90,0.10))
+    }
+  ans = run_time
+  return(ans)
+})
+
+return(mean(rainy_day == 15))
+}
+
+P(20000)
+```
+
+F) P( x = 5 | x > 10)
+```{r, echo=FALSE}
+P = function(n){
+rainy_day = sapply(1:n,function(i){
+  rain = 0
+  run_time = 0
+  while(rain[1] != 1){
+    run_time = run_time + 1
+    rain = sample(c(0,1),1, prob = c(0.90,0.10))
+    }
+  ans = run_time
+  return(ans)
+})
+
+A = mean(rainy_day > 10)
+B = mean(rainy_day > 15)
+A_and_B = A*B
+ans = A_and_B / B
+return(ans)
+}
+
+P(20000)
+```
+
+###Problem II
+
+A)
+```{r, echo=FALSE}
+number = 0
+s = 0
+counter = 0
+while(counter != 5){
+  number = number + 1
+  s = sample(c(0,1),1, prob = c(0.60,0.40))
+  counter = counter + (s == 1)
+}
+
+number
+
+```
+
+B) 20000 trials
+```{r, echo=FALSE}
+
+Glasses = sapply(1:20000,function(i){
+number = 0
+s = 0
+counter = 0
+while(counter != 5){
+  number = number + 1
+  s = sample(c(0,1),1, prob = c(0.60,0.40))
+  counter = counter + (s == 1)
+}
+
+return(number)
+})
+
+hist(Glasses,main = "20000 trials of X ~ Geometric(0.40)", xlab = "Number of Days")
+```
+
+C) Median
+```{r,echo=FALSE}
+Glasses = sapply(1:20000,function(i){
+number = 0
+s = 0
+counter = 0
+while(counter != 5){
+  number = number + 1
+  s = sample(c(0,1),1, prob = c(0.60,0.40))
+  counter = counter + (s == 1)
+}
+
+return(number)
+})
+
+median(Glasses)
+
+```
+
+D) Median & Std Dev
+```{r,echo=FALSE}
+Glasses = sapply(1:20000,function(i){
+number = 0
+s = 0
+counter = 0
+while(counter != 5){
+  number = number + 1
+  s = sample(c(0,1),1, prob = c(0.60,0.40))
+  counter = counter + (s == 1)
+}
+
+return(number)
+})
+
+mean(Glasses)
+sd(Glasses)
+
+```
+
+E)
+```{r,echo=FALSE}
+
+P = function(n){
+Glasses = sapply(1:n,function(i){
+number = 0
+s = 0
+counter = 0
+while(counter != 5){
+  number = number + 1
+  s = sample(c(0,1),1, prob = c(0.60,0.40))
+  counter = counter + (s == 1)
+}
+
+return(number)
+})
+return(mean(Glasses > 10))
+
+}
+
+P(20000)
+
+```
+
+
+F)
+```{r,echo=FALSE}
+
+P = function(n){
+Glasses = sapply(1:n,function(i){
+number = 0
+s = 0
+counter = 0
+while(counter != 5){
+  number = number + 1
+  s = sample(c(0,1),1, prob = c(0.60,0.40))
+  counter = counter + (s == 1)
+}
+
+return(number)
+})
+A = mean(Glasses > 10)
+B = mean(Glasses > 15)
+A_and_B = A*B
+ans = A_and_B / B
+return(ans)
+
+}
+
+P(20000)
+
+```
+
+### Problem III
+
+A) Mean and Standard devation of X & Y
+```{r,echo=FALSE}
+
+X = rnorm(10000, mean = 2, sd = 1)
+Y = rnorm(10000, mean = -2, sd = 5)
+
+m = mean(X)
+std_dev = sd(X)
+ans1 = cbind(m,std_dev)
+ans1
+
+m2 = mean(Y)
+std_dev2 = sd(Y)
+ans2 = cbind(m2,std_dev2)
+ans2
+```
+
+
+B) Mean & Standard Deviation of W = X + Y
+```{r,echo=FALSE}
+X = rnorm(10000, mean = 2, sd = 1)
+Y = rnorm(10000, mean = -2, sd = 5)
+
+W = X + Y
+mean(W)
+sd(W)
+
+```
+
+
+C) P(W > 3)
+```{r,echo=FALSE}
+X = rnorm(10000, mean = 2, sd = 1)
+Y = rnorm(10000, mean = -2, sd = 5)
+
+W = X + Y
+p = sum(W > 3)/length(W)
+p
+
+```
+
+D) Error
+```{r,echo=FALSE}
+m = 10000*(2) + 10000*(-2)
+std_dev = sqrt(1 + 25)
+
+error_mean = m - mean(W)
+error_sd = std_dev - sd(W)
+
+error_mean
+error_sd
+
+z = (3-0)/std_dev
+error_prob = p - (1-pnorm(z)) 
+
+error_prob
+```
+
