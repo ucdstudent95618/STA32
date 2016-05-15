@@ -1,4 +1,4 @@
 # STA32
 
-#Spring 2016 
-#Professor Melcon
+Spring 2016 
+Professor Melcon
