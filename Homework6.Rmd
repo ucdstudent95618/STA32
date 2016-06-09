@@ -1,0 +1,366 @@
+---
+title: "Homework6"
+author: "Miguel Salazar"
+date: "May 23, 2016"
+output: word_document
+---
+
+###Problem I
+
+A)
+```{r, echo=FALSE}
+normal.pop = rnorm(1000000, mean = 5,sd = 10)
+mu = 5
+
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+CI(normal.pop,15,0.95,mu)
+```
+
+B)
+```{r, echo=FALSE}
+normal.pop = rnorm(1000000, mean = 5,sd = 10)
+mu = 5
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+r = replicate(10000,CI(normal.pop,15,0.95,mu))
+table(r)
+```
+
+C) Coverage Probability
+```{r, echo=FALSE}
+t = table(r)
+p = t[2]/10000 
+p
+```
+
+D)
+Yes, this confidence interval has a 95 coverage probability, since the coverage probability (0.9515) is greater than .95.
+
+
+###Problem II
+
+A)
+```{r, echo=FALSE}
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+CI(exp.pop,15,0.95,mu)
+
+```
+
+B)
+```{r, echo=FALSE}
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+r2 = replicate(10000,CI(exp.pop,15,0.95,mu))
+table(r2)
+
+
+```
+
+C)
+```{r, echo=FALSE}
+t2 = table(r2)
+p2 = t2[2]/10000 
+p2
+
+```
+
+D)
+No this confidence interval did not have a 95 coverage probability, since the probability lies under 95 percent (.9123 < .95).
+
+
+###Problem III
+
+A)
+
+```{r,echo=FALSE}
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+CI(exp.pop,60,0.95,mu)
+
+```
+
+B)
+```{r,echo=FALSE}
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+r3 = replicate(10000,CI(exp.pop,60,0.95,mu))
+table(r3)
+
+```
+
+C)
+```{r,echo=FALSE}
+t3 = table(r3)
+p3 = t3[2]/10000 
+p3
+
+```
+
+D)
+No this confidence interval did not have a 95 coverage probability, since the probability lies under 95 percent (.9372 < .95).
+
+********
+###Code Appendix
+
+```{r,eval=FALSE}
+A)
+normal.pop = rnorm(1000000, mean = 5,sd = 10)
+mu = 5
+
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+CI(normal.pop,15,0.95,mu)
+
+
+#B)
+normal.pop = rnorm(1000000, mean = 5,sd = 10)
+mu = 5
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+r = replicate(10000,CI(normal.pop,15,0.95,mu))
+table(r)
+
+
+#C) Coverage Probability
+
+t = table(r)
+p = t[2]/10000 
+p
+
+
+
+###Problem II
+
+#A)
+
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+CI(exp.pop,15,0.95,mu)
+
+
+
+#B)
+
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+r2 = replicate(10000,CI(exp.pop,15,0.95,mu))
+table(r2)
+
+
+
+
+#C)
+
+t2 = table(r2)
+p2 = t2[2]/10000 
+p2
+
+
+
+
+###Problem III
+
+#A)
+
+
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+CI(exp.pop,60,0.95,mu)
+
+
+
+#B)
+
+mu = 5
+exp.pop = rexp(1000000,1/mu)
+
+CI = function(x,n,i,mu){
+  s = sample(x,n,replace = FALSE)
+  std_dev = sd(s)
+  u = mean(s)
+  t = qt((1-i)/2,n-1)
+  
+  upper.bound = u + (abs(t)*(std_dev/sqrt(n)))
+  lower.bound = u - (abs(t)*(std_dev/sqrt(n)))
+  ans = 0
+  if(mu >= lower.bound & mu <= upper.bound){
+    ans = ans + 1
+  }
+  return(ans)
+}
+
+r3 = replicate(10000,CI(exp.pop,60,0.95,mu))
+table(r3)
+
+
+
+#C)
+
+t3 = table(r3)
+p3 = t3[2]/10000 
+p3
+
+
