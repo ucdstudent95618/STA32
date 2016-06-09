@@ -1,0 +1,120 @@
+---
+title: "Homework7"
+author: "Miguel Salazar"
+date: "May 28, 2016"
+output: word_document
+---
+
+### Problem I
+
+```{r,echo=FALSE}
+crime_data <- read.csv("~/Downloads/crime.csv")
+```
+
+A) Plot
+
+
+```{r,echo=FALSE}
+X = crime_data$rate
+Y = crime_data$dip
+
+plot(X,Y,main = "Crime Rate vs. High School Diploma", xlab = "HS Diploma", ylab = "Crime Rate", pch = 19)
+
+```
+
+B) Plot with regression line
+
+
+```{r,echo=FALSE}
+y = lm(Y ~ X, data = crime_data)
+plot(X,Y, main = "Crime Rate vs. High School Diploma", xlab = "HS Diploma", ylab = "Crime Rate", pch = 19)
+abline(y,lwd = 2)
+
+```
+
+C) Interpret the slope and intercept
+
+For this model, we may interpret the slope as: The expected decrease in Crime when HS Diploma increases by 2000 is `r round(y$coefficients[2],digits = 3)`. 
+
+The intercept is `r round(y$coefficients[1],digits = 3)` and it means that when HS Diploma is at zero the crime rate is at the highest point, though there is no data for Crime Rate when it is exactly zero. People will always graduate with a diploma.
+
+D)
+Yes, there appears to be outliers as one is to far to the left and anther to the right.
+
+```{r,echo=FALSE}
+outliers_l = crime_data[crime_data$rate < 2900,]
+outliers_r = crime_data[crime_data$rate > 12000,]
+outliers_l
+outliers_r
+
+```
+
+### Problem II
+
+A) QQ Plot
+
+
+```{r,echo=FALSE}
+qqnorm(y$residuals)
+qqline(y$residuals)
+
+```
+
+No it's not normally distributed, since the normally assumption is violated by the outliers.
+
+B)
+```{r,echo=FALSE}
+plot(y$fitted.values,y$residuals,xlab = "Fitted Values",ylab = "errors",main = "Checking for constancy of variance of the errors")
+```
+
+Since there are outliers, it appears the assumption of the errors having constant variance is not met.
+
+C) Confidence Interval
+
+```{r,echo=FALSE}
+confint(y,level = 0.95)
+```
+
+We are 95 percent confident that Crime Rate will be between (`r confint(y,level = 0.95)[2,]`)
+
+D)
+
+Yes, the confidence interval shows that there is a significant linear relationship between Crime Rate and Individuals recieving diplomas because it is at a great decrease when more individuals recieve their diploma.
+
+********
+###Code Appendix
+
+```{r,eval=FALSE}
+### Problem I
+
+crime_data <- read.csv("~/Downloads/crime.csv")
+#A) Plot
+X = crime_data$rate
+Y = crime_data$dip
+
+plot(X,Y,main = "Crime Rate vs. High School Diploma", xlab = "HS Diploma", ylab = "Crime Rate", pch = 19)
+
+#B) Plot with regression line
+y = lm(Y ~ X, data = crime_data)
+plot(X,Y, main = "Crime Rate vs. High School Diploma", xlab = "HS Diploma", ylab = "Crime Rate", pch = 19)
+abline(y,lwd = 2)
+
+#D)
+outliers_l = crime_data[crime_data$rate < 2900,]
+outliers_r = crime_data[crime_data$rate > 12000,]
+outliers_l
+outliers_r
+
+### Problem II
+
+#A) QQ Plot
+qqnorm(y$residuals)
+qqline(y$residuals)
+
+#B)
+plot(y$fitted.values,y$residuals,xlab = "Fitted Values",ylab = "errors",main = "Checking for constancy of variance of the errors")
+
+#C) Confidence Interval
+confint(y,level = 0.95)
+```
+
